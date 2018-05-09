@@ -117,6 +117,49 @@ function toArrayIndex(arg) {
     return toArrayIndexOrDefault(arg, arg);
 }
 
+module.exports.isUndefined = isUndefined;
+
+function isUndefined(arg) {
+    return arg === void 0;
+}
+
+module.exports.isNull = isNull;
+
+function isNull(arg) {
+    return arg === null;
+}
+
+module.exports.isNullOrUndefined = isNullOrUndefined;
+
+function isNullOrUndefined(arg) {
+    return arg === null || arg === void 0;
+}
+
+module.exports.firstDefined = firstDefined;
+
+function firstDefined() {
+    for (let i = 0; i < arguments.length; i++) {
+        if (arguments[i] !== void 0) {
+            return arguments[i];
+        }
+    }
+}
+
+module.exports.firstValid = firstValid;
+
+function firstValid() {
+    let lastDefined;
+    for (let i = 0; i < arguments.length; i++) {
+        let arg = arguments[i];
+        if (isValid(arg)) {
+            return arg;
+        } else if (arg !== UNDEFINED) {
+            lastDefined = arg;
+        }
+    }
+    return lastDefined;
+}
+
 /*
 const utilTypes = require('util-type-funcs');
 const isString = utilTypes.isString;
@@ -136,4 +179,9 @@ const toInteger = utilTypes.toInteger;
 const toArrayIndexOrDefault = utilTypes.toArrayIndexOrDefault;
 const isArrayIndex = utilTypes.isArrayIndex;
 const toArrayIndex = utilTypes.toArrayIndex;
+const isUndefined = utilTypes.isUndefined;
+const isNull = utilTypes.isNull;
+const isNullOrUndefined = utilTypes.isNullOrUndefined;
+const firstDefined = utilTypes.firstDefined;
+const firstValid = utilTypes.firstValid;
 */
