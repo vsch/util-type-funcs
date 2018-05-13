@@ -35,6 +35,7 @@ function extend(other, add) {
     return other;
 }
 
+/** @deprecated */
 module.exports.hasOwnProperty = hasOwnProperty;
 
 function hasOwnProperty(obj, prop) {
