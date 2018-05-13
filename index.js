@@ -47,6 +47,12 @@ function isObjectLike(param) {
     return !!param && typeof param === "object";
 }
 
+module.exports.isObject = isObject;
+
+function isObject(param) {
+    return !!param && typeof param === "object" && param.constructor === Object;
+}
+
 module.exports.isArray = isArray;
 
 function isArray(param) {
