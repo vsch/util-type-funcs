@@ -1,6 +1,6 @@
 {
   "name": "util-type-funcs",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "type test and conversion related functions",
   "main": "index.js",
   "license": "MIT",

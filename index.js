@@ -21,20 +21,6 @@ function isNumber(arg) {
     return typeof arg === 'number';
 }
 
-module.exports.extend = extend;
-
-function extend(other, add) {
-    if (!add || !isObjectLike(add)) return other;
-
-    let keys = Object.keys(add);
-    let i = keys.length;
-    while (i--) {
-        const key = keys[i];
-        other[key] = add[key];
-    }
-    return other;
-}
-
 /** @deprecated */
 module.exports.hasOwnProperty = hasOwnProperty;
 
@@ -167,6 +153,77 @@ function firstValid() {
     return lastDefined;
 }
 
+module.exports.forAllPrototypes = forAllPrototypes;
+
+/**
+ * @this  {constructor}   constructor
+ * @param callback      function(prototype) called for each prototype in the chain
+ */
+function forAllPrototypes(callback) {
+    if (this) {
+        let prototype = this.prototype;
+        while (prototype) {
+            callback(prototype);
+            prototype = Object.getPrototypeOf(prototype);
+        }
+    }
+}
+
+module.exports.callPrototypeChainDown = callPrototypeChainDown;
+
+/**
+ * Call method in prototype chain in down chain order
+ *
+ * @this  {Model}   instance model
+ * @param methodName
+ */
+function callPrototypeChainDown(methodName) {
+    const methods = [];
+    forAllPrototypes.call(this.constructor, prototype => {
+        if (prototype.hasOwnProperty(methodName)) {
+            methods.push(prototype[methodName]);
+        }
+    });
+
+    const args = Array.prototype.slice.call(arguments, 1);
+    let i = methods.length;
+    while (i--) {
+        const method = methods[i];
+        method.apply(this, args);
+    }
+}
+
+module.exports.callPrototypeChainUp = callPrototypeChainUp;
+
+/**
+ * Call method in prototype chain in up chain order
+ *
+ * @this  {Model}   instance model
+ * @param methodName
+ */
+function callPrototypeChainUp(methodName) {
+    const args = Array.prototype.slice.call(arguments, 1);
+    forAllPrototypes.call(this.constructor, prototype => {
+        if (prototype.hasOwnProperty(methodName)) {
+            prototype[methodName].apply(this, args);
+        }
+    });
+}
+
+module.exports.extend = extend;
+
+function extend(other, add) {
+    if (!add || !isObjectLike(add)) return other;
+
+    let keys = Object.keys(add);
+    let i = keys.length;
+    while (i--) {
+        const key = keys[i];
+        other[key] = add[key];
+    }
+    return other;
+}
+
 /*
 const utilTypes = require('util-type-funcs');
 const isString = utilTypes.isString;
@@ -191,4 +248,7 @@ const isNull = utilTypes.isNull;
 const isNullOrUndefined = utilTypes.isNullOrUndefined;
 const firstDefined = utilTypes.firstDefined;
 const firstValid = utilTypes.firstValid;
+const forAllPrototypes = utilTypes.forAllPrototypes;
+const callPrototypeChainDown = utilTypes.callPrototypeChainDown;
+const callPrototypeChainUp = utilTypes.callPrototypeChainUp;
 */

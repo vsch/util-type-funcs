@@ -2,11 +2,24 @@
 
 [TOC]: # " "
 
+- [0.2.4](#024)
 - [0.2.2](#022)
 - [0.2.1](#021)
 - [0.2.0](#020)
 - [0.1.0](#010)
 
+
+## 0.2.4
+
+* Add: prototype chain functions:
+  * `forAllPrototypes.call(constructor, callback)` - calls callback(prototype) for all
+    prototypes in the prototype chain, including constructor.prototype
+  * `callPrototypeChainDown.call(instance, methodName,...args)` - calls methodName with args in
+    all prototypes in the chain which have the method in own properties with `this` set to
+    `instance`, calls are made in reverse prototype chain order
+  * `callPrototypeChainUp.call(instance, methodName,...args)` - calls methodName with args in
+    all prototypes in the chain which have the method in own properties with `this` set to
+    `instance`, calls are made in prototype chain order
 
 ## 0.2.2
 
