@@ -1,6 +1,6 @@
 # util-type-funcs
 
-[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+[![experimental](https://badges.github.io/stability-badges/dist/experimental.svg)](https://github.com/badges/stability-badges)
 
 Small utility library implementing type related tests and conversions
 
@@ -22,5 +22,6 @@ npm install util-type-funcs --save
 
 ## License
 
-MIT, see [LICENSE.md](http://github.com/vsch/util-type-funcs/blob/master/LICENSE.md) for details.
+MIT, see [LICENSE.md](https://github.com/vsch/util-type-funcs/raw/master/LICENSE.md) for
+details.
 
