@@ -1,6 +1,6 @@
 "use strict";
 
-const jestEach = require('jest-each');
+const jestEach = require('jest-each').default;
 const utilTypes = require('util-type-funcs');
 const isString = utilTypes.isString;
 const isFunction = utilTypes.isFunction;
