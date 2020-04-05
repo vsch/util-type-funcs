@@ -1,6 +1,6 @@
 {
   "name": "util-type-funcs",
-  "version": "0.2.10",
+  "version": "0.2.12",
   "description": "type test and conversion related functions",
   "main": "index.js",
   "license": "MIT",
@@ -14,8 +14,8 @@
     "lodash.isstring": "^4.0.1"
   },
   "devDependencies": {
-    "jest": "^24.8.0",
-    "jest-each": "^24.8.0"
+    "jest": "^25.2.6",
+    "jest-each": "^25.2.6"
   },
   "scripts": {
     "test": "jest"
